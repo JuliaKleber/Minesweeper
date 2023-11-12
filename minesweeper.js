@@ -59,7 +59,7 @@ const minesweeperGame = () => {
 
   const initializeBoard = (length, width) => {
     boardInfo = [];
-    emptyRow = Array(length).fill(0);
+    const emptyRow = Array(length).fill(0);
     for (let i = 0; i < width; i++) {
       boardInfo.push([...emptyRow]);
     }
@@ -124,7 +124,7 @@ const minesweeperGame = () => {
 
   const changeMinesCount = (event) => {
     const currentClassName = event.target.className;
-    minesCountField = document.querySelector("#number-mines")
+    const minesCountField = document.querySelector("#number-mines")
     if (currentClassName === "flagged") {
       minesCountField.value = parseInt(minesCountField.value, 10) - 1;
     }
@@ -226,13 +226,15 @@ const minesweeperGame = () => {
   submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     if (isInputValid()) {
+      let length;
+      let width;
       [length, width, numberMines] = readInput();
       resetMessage();
       resetBoard();
       createBoard(length, width);
       initializeBoard(length, width);
       setMines(length, width);
-      board.addEventListener("contextmenu", event => event.preventDefault());
+      board.addEventListener("contextmenu", rightClick => rightClick.preventDefault());
       board.addEventListener("mouseup", handleRightClick);
       board.addEventListener("click", handleLeftClick);
     }
