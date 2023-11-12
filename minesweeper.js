@@ -5,12 +5,13 @@ const minesweeperGame = () => {
   let numberMines;
 
   const readInput = () => {
-    const gridSize = parseInt(document.querySelector("#grid-size").value, 10);
+    const length = parseInt(document.querySelector("#length").value, 10);
+    const width = parseInt(document.querySelector("#width").value, 10);
     const numberMines = parseInt(
       document.querySelector("#number-mines").value,
       10
     );
-    return [gridSize, numberMines];
+    return [length, width, numberMines];
   };
 
   const isValid = (parsedInput, condition, className) => {
@@ -25,10 +26,11 @@ const minesweeperGame = () => {
   };
 
   const isInputValid = () => {
-    [gridSize, numberMines] = readInput();
-    const isGridSizeWithinBounds = isValid(gridSize, gridSize > 75, "#grid-size");
-    const isNumberMinesValid = isValid(numberMines, numberMines >= (gridSize * gridSize), "#number-mines");
-    return isGridSizeWithinBounds && isNumberMinesValid;
+    [length, width, numberMines] = readInput();
+    const isLengthWithinBounds = isValid(length, length > 75, "#length");
+    const isWidthWithinBounds = isValid(width, width > 100, "#width");
+    const isNumberMinesValid = isValid(numberMines, numberMines >= (length * width), "#number-mines");
+    return isLengthWithinBounds && isWidthWithinBounds && isNumberMinesValid;
   };
 
   const resetMessage = () => {
@@ -39,26 +41,26 @@ const minesweeperGame = () => {
     board.textContent = "";
   };
 
-  const createRowHTML = (gridSize) => {
+  const createRowHTML = (length) => {
     let row = "";
-    for (let i = 0; i < gridSize; i++) {
+    for (let i = 0; i < length; i++) {
       row += "<td class='unopened'></td>";
     }
     return row;
   };
 
-  const createBoard = (gridSize) => {
+  const createBoard = (length, width) => {
     let boardHTML = "";
-    for (let i = 0; i < gridSize; i++) {
-      boardHTML += `<tr>${createRowHTML(gridSize)}</tr>`;
+    for (let i = 0; i < width; i++) {
+      boardHTML += `<tr>${createRowHTML(length)}</tr>`;
     }
     board.insertAdjacentHTML("afterbegin", boardHTML);
   };
 
-  const initializeBoard = (gridSize) => {
+  const initializeBoard = (length, width) => {
     boardInfo = [];
-    emptyRow = Array(gridSize).fill(0);
-    for (let i = 0; i < gridSize; i++) {
+    emptyRow = Array(length).fill(0);
+    for (let i = 0; i < width; i++) {
       boardInfo.push([...emptyRow]);
     }
   };
@@ -84,15 +86,15 @@ const minesweeperGame = () => {
     });
   };
 
-  const setMines = (gridSize) => {
+  const setMines = (length, width) => {
     let i = 0;
     let failedAttempts = 0;
     while (i < numberMines && failedAttempts < 1000) {
-      const rowNumber = Math.floor(Math.random() * gridSize);
-      const columnNumber = Math.floor(Math.random() * gridSize);
+      const rowNumber = Math.floor(Math.random() * width);
+      const columnNumber = Math.floor(Math.random() * length);
       if (boardInfo[rowNumber][columnNumber] !== "mine") {
         boardInfo[rowNumber][columnNumber] = "mine";
-        updateNeighbourCounts(rowNumber, columnNumber, gridSize);
+        updateNeighbourCounts(rowNumber, columnNumber);
         i += 1;
       } else {
         failedAttempts += 1;
@@ -224,12 +226,12 @@ const minesweeperGame = () => {
   submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     if (isInputValid()) {
-      [gridSize, numberMines] = readInput();
+      [length, width, numberMines] = readInput();
       resetMessage();
       resetBoard();
-      createBoard(gridSize);
-      initializeBoard(gridSize);
-      setMines(gridSize);
+      createBoard(length, width);
+      initializeBoard(length, width);
+      setMines(length, width);
       board.addEventListener("contextmenu", event => event.preventDefault());
       board.addEventListener("mouseup", handleRightClick);
       board.addEventListener("click", handleLeftClick);
