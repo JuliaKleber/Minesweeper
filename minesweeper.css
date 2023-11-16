@@ -41,12 +41,12 @@ td.mine-neighbour-8 {
 }
 
 /* Positioning the Minesweep table and make sure the cells are square */
-table #minesweeper {
+table #board {
   margin: auto;
   border: 1px solid #999;
   border-collapse: collapse;
 }
-table #minesweeper td {
+table #board td {
   width: 24px;
   height: 24px;
   background-size: cover;
