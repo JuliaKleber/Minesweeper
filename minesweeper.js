@@ -2,9 +2,12 @@ const board = document.querySelector("#board");
 const submitButton = document.querySelector("#submit-btn");
 const numberMinesInput = document.querySelector("#number-mines");
 const messageElement = document.querySelector("#message");
+const messageValidations = document.querySelector("#message-validations");
+
 const unopenedClass = "unopened"
 const flaggedClass = "flagged"
 const questionClass = "question"
+
 let boardInfo = [];
 let numberMines;
 
@@ -30,10 +33,20 @@ const isValid = (parsedInput, condition, className) => {
 };
 
 const isInputValid = () => {
+  messageValidations.innerText = "";
   [length, width, numberMines] = readInput();
-  const isLengthWithinBounds = isValid(length, length > 75, "#length");
-  const isWidthWithinBounds = isValid(width, width > 100, "#width");
-  const isNumberMinesValid = isValid(numberMines, numberMines >= (length * width), "#number-mines");
+  const isLengthWithinBounds = isValid(length, length > 75 || length < 2, "#length");
+  if (!isLengthWithinBounds) {
+    messageValidations.innerHTML += "Please choose a width between 2 and 75!<br>"
+  }
+  const isWidthWithinBounds = isValid(width, width > 100 || width < 2, "#width");
+  if (!isWidthWithinBounds) {
+    messageValidations.innerHTML += "Please choose a width between 2 and 100!<br>"
+  }
+  const isNumberMinesValid = isValid(numberMines, numberMines >= (length * width) || numberMines < 1, "#number-mines");
+  if (!isNumberMinesValid) {
+    messageValidations.innerHTML += `Please choose between 1 and ${width * length - 1} mines!<br>`
+  }
   return isLengthWithinBounds && isWidthWithinBounds && isNumberMinesValid;
 };
 
