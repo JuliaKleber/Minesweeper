@@ -15,6 +15,13 @@ This is a simple implementation of the classic game Minesweeper using JavaScript
 3. Enter the desired board size and number of mines.
 4. Click the "Submit" button to start the game.
 
+## Built with
+
+- HTML
+- CSS
+- Bootstrap
+- Vanilla JavaScript
+
 ## Code Overview
 
 The main JavaScript file is `minesweeper.js`. Here's a brief overview of what the code does:
