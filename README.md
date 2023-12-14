@@ -36,8 +36,8 @@ The main JavaScript file is `minesweeper.js`. Here's a brief overview of what th
 
 ## Screenshot
 
-https://github.com/GoldieCrystal/Minesweeper/assets/142741980/a53f0e2a-596f-4d22-a2c3-0d979438af07
+![image](https://github.com/GoldieCrystal/Minesweeper/assets/142741980/a53f0e2a-596f-4d22-a2c3-0d979438af07)
 
 ## Author
 
-Julia Kleber (github.com/GoldieCrystal)
+[Julia Kleber](https://github.com/GoldieCrystal)
