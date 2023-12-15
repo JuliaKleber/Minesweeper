@@ -4,9 +4,9 @@ const numberMinesInput = document.querySelector("#number-mines");
 const messageElement = document.querySelector("#message");
 const messageValidations = document.querySelector("#message-validations");
 
-const unopenedClass = "unopened"
-const flaggedClass = "flagged"
-const questionClass = "question"
+const unopenedClass = "unopened";
+const flaggedClass = "flagged";
+const questionClass = "question";
 
 let boardInfo = [];
 let numberMines;
@@ -14,10 +14,7 @@ let numberMines;
 const readInput = () => {
   const length = parseInt(document.querySelector("#length").value, 10);
   const width = parseInt(document.querySelector("#width").value, 10);
-  const numberMines = parseInt(
-    numberMinesInput.value,
-    10
-  );
+  const numberMines = parseInt(numberMinesInput.value, 10);
   return [length, width, numberMines];
 };
 
@@ -35,18 +32,39 @@ const isValid = (parsedInput, condition, className) => {
 const isInputValid = () => {
   messageValidations.innerText = "";
   [length, width, numberMines] = readInput();
-  const isLengthWithinBounds = isValid(length, length > 75 || length < 2, "#length");
+  const isLengthWithinBounds = isValid(
+    length,
+    length > 75 || length < 2,
+    "#length"
+  );
   if (!isLengthWithinBounds) {
-    messageValidations.innerHTML += "Please choose a width between 2 and 75!<br>"
+    messageValidations.innerHTML +=
+      "Please choose a width between 2 and 75!<br>";
   }
-  const isWidthWithinBounds = isValid(width, width > 100 || width < 2, "#width");
+  const isWidthWithinBounds = isValid(
+    width,
+    width > 100 || width < 2,
+    "#width"
+  );
   if (!isWidthWithinBounds) {
-    messageValidations.innerHTML += "Please choose a width between 2 and 100!<br>"
+    messageValidations.innerHTML +=
+      "Please choose a width between 2 and 100!<br>";
   }
-  const isNumberMinesValid = isValid(numberMines, numberMines >= (length * width) || numberMines < 1, "#number-mines");
-  if (!isNumberMinesValid) {
-    messageValidations.innerHTML += `Please choose between 1 and ${width * length - 1} mines!<br>`
+  const isNumberMinesValid = isValid(
+    numberMines,
+    numberMines >= length * width || numberMines < 1,
+    "#number-mines"
+  );
+  if (!isNumberMinesValid && isLengthWithinBounds && isWidthWithinBounds) {
+    messageValidations.innerHTML += `Please choose between 1 and ${
+      width * length - 1
+    } mines!<br>`;
   }
+  // else if (!isNumberMinesValid) {
+  //   messageValidations.innerHTML += `Please choose between 1 and ${
+  //     width * length - 1
+  //   } mines!<br>`;
+  // }
   return isLengthWithinBounds && isWidthWithinBounds && isNumberMinesValid;
 };
 
@@ -88,15 +106,16 @@ const isTileNeighbour = (checkedRow, checkedColumn, row, column) => {
   const isDiagonalNeighbour = rowDiff === 1 && columnDiff === 1;
   const isDirectRowNeighbour = rowDiff === 0 && columnDiff === 1;
   const isDirectColumnNeighbour = rowDiff === 1 && columnDiff === 0;
-  return (
-    isDiagonalNeighbour || isDirectRowNeighbour || isDirectColumnNeighbour
-  );
+  return isDiagonalNeighbour || isDirectRowNeighbour || isDirectColumnNeighbour;
 };
 
 const updateNeighbourCounts = (bombRowIndex, bombColumnIndex) => {
   boardInfo.forEach((row, rowIndex) => {
     row.forEach((tile, tileIndex) => {
-      if (tile !== "mine" && isTileNeighbour(rowIndex, tileIndex, bombRowIndex, bombColumnIndex)) {
+      if (
+        tile !== "mine" &&
+        isTileNeighbour(rowIndex, tileIndex, bombRowIndex, bombColumnIndex)
+      ) {
         boardInfo[rowIndex][tileIndex] += 1;
       }
     });
@@ -124,10 +143,12 @@ const setMines = (length, width) => {
 
 const tileIsNotOpen = (event) => {
   const classList = event.target.classList;
-  return classList.contains(unopenedClass) ||
+  return (
+    classList.contains(unopenedClass) ||
     classList.contains(flaggedClass) ||
-    classList.contains(questionClass);
-}
+    classList.contains(questionClass)
+  );
+};
 
 const changeClassName = (event) => {
   const classMap = {
@@ -143,7 +164,7 @@ const changeClassName = (event) => {
 
 const changeMinesCount = (event) => {
   const currentClassName = event.target.className;
-  const minesCountField = numberMinesInput
+  const minesCountField = numberMinesInput;
   if (currentClassName === flaggedClass) {
     minesCountField.value = parseInt(minesCountField.value, 10) - 1;
   }
@@ -178,7 +199,9 @@ const openTile = (element, row, column) => {
 };
 
 const changeTileStates = (className) => {
-  const unopenedTileElements = [...document.querySelectorAll(".unopened")].concat([...document.querySelectorAll(".question")]);
+  const unopenedTileElements = [
+    ...document.querySelectorAll(".unopened"),
+  ].concat([...document.querySelectorAll(".question")]);
   unopenedTileElements.forEach((tile) => {
     tile.classList.remove(unopenedClass);
     tile.classList.remove(questionClass);
@@ -187,7 +210,9 @@ const changeTileStates = (className) => {
 };
 
 const changeBombTileStates = (className) => {
-  const unopenedTileElements = [...document.querySelectorAll(".unopened")].concat([...document.querySelectorAll(".question")]);
+  const unopenedTileElements = [
+    ...document.querySelectorAll(".unopened"),
+  ].concat([...document.querySelectorAll(".question")]);
   unopenedTileElements.forEach((tile) => {
     const tileRow = tile.parentNode.rowIndex;
     const tileColumn = tile.cellIndex;
@@ -222,7 +247,7 @@ const hasWon = () => {
   const tileStates = [unopenedClass, flaggedClass, questionClass];
   let numberUnopenedTiles = 0;
   tileStates.forEach((className) => {
-    numberUnopenedTiles += document.querySelectorAll(`.${className}`).length
+    numberUnopenedTiles += document.querySelectorAll(`.${className}`).length;
   });
   return numberUnopenedTiles === numberMines;
 };
@@ -253,7 +278,9 @@ submitButton.addEventListener("click", (event) => {
     createBoard(length, width);
     initializeBoard(length, width);
     setMines(length, width);
-    board.addEventListener("contextmenu", rightClick => rightClick.preventDefault());
+    board.addEventListener("contextmenu", (rightClick) =>
+      rightClick.preventDefault()
+    );
     board.addEventListener("mouseup", handleRightClick);
     board.addEventListener("click", handleLeftClick);
   }
