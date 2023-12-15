@@ -51,3 +51,16 @@ table #board td {
   height: 24px;
   background-size: cover;
 }
+
+.input-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 770px) {
+  .input-fields {
+    flex-direction: column;
+  }
+}

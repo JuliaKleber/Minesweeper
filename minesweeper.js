@@ -60,11 +60,6 @@ const isInputValid = () => {
       width * length - 1
     } mines!<br>`;
   }
-  // else if (!isNumberMinesValid) {
-  //   messageValidations.innerHTML += `Please choose between 1 and ${
-  //     width * length - 1
-  //   } mines!<br>`;
-  // }
   return isLengthWithinBounds && isWidthWithinBounds && isNumberMinesValid;
 };
 
