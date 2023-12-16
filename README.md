@@ -40,4 +40,4 @@ The main JavaScript file is `minesweeper.js`. Here's a brief overview of what th
 
 ## Author
 
-[Julia Kleber](https://github.com/GoldieCrystal)
+[Julia Kleber](https://github.com/JuliaKleber)
