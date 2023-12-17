@@ -22,6 +22,10 @@ This is a simple implementation of the classic game Minesweeper using JavaScript
 - Bootstrap
 - Vanilla JavaScript
 
+## Link
+
+https://juliakleber.github.io/Minesweeper/
+
 ## Code Overview
 
 The main JavaScript file is `minesweeper.js`. Here's a brief overview of what the code does:
