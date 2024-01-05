@@ -22,9 +22,10 @@ This is a simple implementation of the classic game Minesweeper using JavaScript
 - CSS
 - Bootstrap
 
-## Link
+## Links
 
 https://juliakleber.github.io/Minesweeper/
+https://julias--minesweeper.web.app
 
 ## Code Overview
 
