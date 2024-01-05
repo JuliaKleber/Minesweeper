@@ -25,6 +25,7 @@ This is an implementation of the classic game Minesweeper using JavaScript.
 ## Links
 
 https://juliakleber.github.io/Minesweeper/
+
 https://julias--minesweeper.web.app
 
 ## Screenshot
