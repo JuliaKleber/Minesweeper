@@ -1,6 +1,6 @@
 # Minesweeper
 
-This is a simple implementation of the classic game Minesweeper using JavaScript.
+This is an implementation of the classic game Minesweeper using JavaScript.
 
 ## Features
 
@@ -26,18 +26,6 @@ This is a simple implementation of the classic game Minesweeper using JavaScript
 
 https://juliakleber.github.io/Minesweeper/
 https://julias--minesweeper.web.app
-
-## Code Overview
-
-The main JavaScript file is `minesweeper.js`. Here's a brief overview of what the code does:
-
-- `board`, `submitButton`, `numberMinesInput`, `messageElement`, and `messageValidations` are all selectors for different elements in the HTML.
-- `unopenedClass`, `flaggedClass`, and `questionClass` are CSS classes used to style the squares on the board.
-- `boardInfo` is an array that stores information about the state of the game board.
-- `numberMines` is the number of mines on the board.
-- `readInput` is a function that reads the user's input for the board size and number of mines.
-- `isValid` is a function that checks if the user's input is valid.
-- `isInputValid` is a function that displays a message if the user's input is invalid.
 
 ## Screenshot
 
