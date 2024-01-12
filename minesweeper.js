@@ -39,7 +39,7 @@ const isInputValid = () => {
   );
   if (!isLengthWithinBounds) {
     messageValidations.innerHTML +=
-      "Please choose a width between 2 and 75!<br>";
+      "Please choose a length between 2 and 75!<br>";
   }
   const isWidthWithinBounds = isValid(
     width,
